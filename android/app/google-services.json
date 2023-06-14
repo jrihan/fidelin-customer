@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "856797148723",
+    "firebase_url": "https://fidelin-b1ad0-default-rtdb.firebaseio.com",
+    "project_id": "fidelin-b1ad0",
+    "storage_bucket": "fidelin-b1ad0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856797148723:android:d546b6ee379e6f1bfe9546",
+        "android_client_info": {
+          "package_name": "com.fidelin.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856797148723-in129antq1jsoroabiqti1vmcisd5454.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5r02CioZ8JgnFgCWObiDqH12V4Spbqn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856797148723-in129antq1jsoroabiqti1vmcisd5454.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "856797148723-2o7cltufi13u876rj0s5tp90bgngui8v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fidelin.customer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
