@@ -1,5 +1,6 @@
 import 'package:customer/app/modules/home/modules/cards/presentation/pages/cards_page.dart';
 import 'package:customer/app/modules/home/modules/profile/presentation/pages/profile_page.dart';
+import 'package:customer/app/modules/home/modules/qrcode/presentation/qrcoder_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
     _selectedPageIndex = 0;
     _pages = [
       CardsPage(),
+      const QrCodePage(),
       const ProfilePage(),
     ];
 

@@ -1,4 +1,4 @@
-import 'package:customer/app/stores/user_store.dart';
+import 'package:customer/shared/stores/user_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AuthGuard extends RouteGuard {

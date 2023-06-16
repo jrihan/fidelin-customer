@@ -1,4 +1,4 @@
-import 'package:customer/app/stores/user_store.dart';
+import 'package:customer/shared/stores/user_store.dart';
 import 'package:dartz/dartz.dart';
 import 'package:customer/app/modules/auth/data/dto/user_dto.dart';
 import 'package:customer/app/modules/auth/domain/entities/user_entity.dart';
