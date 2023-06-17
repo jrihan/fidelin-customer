@@ -52,34 +52,68 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _tapHandler(int index) {
+    setState(() {
+      _selectedPageIndex = index;
+      _pageController.jumpToPage(index);
+    });
+  }
+
   Widget bottomNavigationBar() {
     return AnimatedBuilder(
       animation: _pageController,
-      builder: (context, snapshot) => BottomNavigationBar(
-        backgroundColor: Colors.white,
-        showSelectedLabels: true,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedPageIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedPageIndex = index;
-            _pageController.jumpToPage(index);
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.credit_card_sharp),
-            label: 'Cartões',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Pesquisar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-          ),
-        ],
+      builder: (context, snapshot) => Container(
+        color: Colors.white,
+        height: 70,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            InkWell(
+              onTap: () => _tapHandler(0),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+                child: Icon(
+                  Icons.home,
+                  color: _selectedPageIndex == 0
+                      ? Theme.of(context).colorScheme.primary
+                      : Colors.black45,
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () => _tapHandler(1),
+              child: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        Color(0xFFFF00D6),
+                        Color(0xFFFF4D00),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+                child: Icon(Icons.qr_code, color: Colors.white),
+              ),
+            ),
+            InkWell(
+              onTap: () => _tapHandler(2),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+                child: Icon(
+                  Icons.person,
+                  color: _selectedPageIndex == 2
+                      ? Theme.of(context).colorScheme.primary
+                      : Colors.black45,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
