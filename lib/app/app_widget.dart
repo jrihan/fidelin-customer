@@ -11,13 +11,13 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFEA4335),
-          primary: const Color(0xFFEA4335),
-          secondary: const Color(0xFFEA4335),
+          seedColor: const Color(0xFFF22F52),
+          primary: const Color(0xFFF22F52),
+          secondary: const Color(0xFFF22F52),
           brightness: Brightness.light,
         ),
         appBarTheme: const AppBarTheme(
-          color: Color(0xFFEA4335),
+          color: Color(0xFFF22F52),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

@@ -24,8 +24,20 @@ abstract class _SignInControllerBase with Store {
     _signUpWithEmailUseCase = signUpWithEmailUseCase;
   }
 
+  @observable
+  bool passwordVisible = false;
+
+  @observable
+  bool loading = false;
+
+  @action
+  void togglePasswordVisible() {
+    passwordVisible = !passwordVisible;
+  }
+
   @action
   Future<void> signIn() async {
+    loading = true;
     final Either<Exception, UserEntity> _response =
         await _signInWithEmailUseCase.call(
             email: 'test@gmail.com', password: '12345678');
@@ -33,6 +45,7 @@ abstract class _SignInControllerBase with Store {
       _userStore.setUser(user);
       Modular.to.navigate('/home/');
     });
+    loading = false;
   }
 
   @action

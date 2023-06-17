@@ -14,3 +14,23 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+### Splash Screen
+flutter pub run flutter_native_splash:create
+
+### Icons
+flutter pub run flutter_launcher_icons:main
+
+flutter pub run build_runner watch --delete-conflicting-outputs
+
+## Test Coverage
+
+'''
+# Generate `coverage/lcov.info` file
+flutter test --coverage
+# Generate HTML report
+# Note: on macOS you need to have lcov installed on your system (`brew install lcov`) to use this:
+genhtml coverage/lcov.info -o coverage/html
+# Open the report
+open coverage/html/index.html
+'''
