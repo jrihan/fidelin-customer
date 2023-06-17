@@ -54,4 +54,13 @@ class FirebaseDataSourceImpl implements AuthDataSource {
       rethrow;
     }
   }
+
+  @override
+  Future<void> requestForgotPassword({required String email}) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

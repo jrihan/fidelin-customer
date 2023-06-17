@@ -83,4 +83,15 @@ class MockAuthDataSource extends _i1.Mock implements _i3.AuthDataSource {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> requestForgotPassword({required String? email}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #requestForgotPassword,
+          [],
+          {#email: email},
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

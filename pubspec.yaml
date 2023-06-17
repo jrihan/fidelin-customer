@@ -86,6 +86,7 @@ flutter:
   assets:
     - assets/images/white-logo.png
     - assets/images/forgot_password.png
+    - assets/images/mail_sent.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

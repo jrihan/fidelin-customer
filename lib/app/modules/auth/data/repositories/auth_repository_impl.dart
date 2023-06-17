@@ -33,4 +33,15 @@ class AuthRepositoryImpl implements AuthRepository {
       return left(Exception("Erro Inesperado"));
     }
   }
+
+  @override
+  Future<Either<Exception, Unit>> forgotPassword(
+      {required String email}) async {
+    try {
+      await _dataSource.requestForgotPassword(email: email);
+      return right(unit);
+    } on Exception catch (e) {
+      return left(Exception("Erro Inesperado"));
+    }
+  }
 }

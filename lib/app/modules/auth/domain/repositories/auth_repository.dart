@@ -8,4 +8,6 @@ abstract class AuthRepository {
       {required String email, required String password});
 
   Future<Either<Exception, Unit>> signUpWithEmail(UserDTO user);
+
+  Future<Either<Exception, Unit>> forgotPassword({required String email});
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'dart:io' show Platform;
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -169,6 +170,14 @@ class _SignInPageState extends State<SignInPage> {
                     Buttons.Google,
                     onPressed: () {},
                     text: "Entrar com o Google",
+                  ),
+                  Visibility(
+                    visible: Platform.isIOS,
+                    child: SignInButton(
+                      Buttons.Apple,
+                      onPressed: () {},
+                      text: "Entrar com a Apple",
+                    ),
                   ),
                   const SizedBox(
                     height: 16.0,

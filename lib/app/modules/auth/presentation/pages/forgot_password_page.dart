@@ -1,5 +1,8 @@
-import 'package:flutter/foundation.dart';
+import 'package:customer/app/modules/auth/presentation/controllers/forgot_password_controller.dart';
+import 'package:customer/app/modules/auth/presentation/pages/check_email_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -9,6 +12,19 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  final ForgotPasswordController _controller =
+      Modular.get<ForgotPasswordController>();
+
+  void _handleForgotPasswordRequest(String email) {
+    _controller.requestForgotPassword(email: email).then((bool? value) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const CheckEmailPage(),
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,26 +80,31 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     const SizedBox(
                       height: 16.0,
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: false
-                          ? SizedBox(
-                              child: Center(
-                                child: CircularProgressIndicator(
-                                  color:
-                                      Theme.of(context).colorScheme.background,
+                    Observer(
+                      builder: (_) => ElevatedButton(
+                        onPressed: () => _handleForgotPasswordRequest(
+                            "jonatha_rihan@hotmail.com"),
+                        child: _controller.loading
+                            ? SizedBox(
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background,
+                                  ),
                                 ),
+                                height: 25.0,
+                                width: 25.0,
+                              )
+                            : Text(
+                                "Enviar",
+                                style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background),
                               ),
-                              height: 25.0,
-                              width: 25.0,
-                            )
-                          : Text(
-                              "Enviar",
-                              style: TextStyle(
-                                  fontSize: 16.0,
-                                  color:
-                                      Theme.of(context).colorScheme.background),
-                            ),
+                      ),
                     ),
                     const SizedBox(
                       height: 16.0,

@@ -7,4 +7,6 @@ abstract class AuthDataSource {
   Future<void> signUpWithEmail(UserDTO user);
 
   Future<void> signOut();
+
+  Future<void> requestForgotPassword({required String email});
 }
