@@ -5,6 +5,7 @@ import 'package:customer/app/modules/auth/data/repositories/auth_repository_impl
 import 'package:customer/app/modules/auth/domain/usecases/signin_with_email_usecase.dart';
 import 'package:customer/app/modules/auth/domain/usecases/signup_with_email_usercase.dart';
 import 'package:customer/app/modules/auth/presentation/controllers/signin_controller.dart';
+import 'package:customer/app/modules/auth/presentation/pages/forgot_password_page.dart';
 import 'package:customer/app/modules/auth/presentation/pages/signin_page.dart';
 import 'package:customer/app/modules/auth/presentation/pages/signup_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,5 +32,9 @@ class AuthModule extends Module {
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const SignInPage()),
         ChildRoute('/signup', child: (context, args) => const SignUpPage()),
+        ChildRoute(
+          '/forgot-password',
+          child: (context, args) => const ForgotPasswordPage(),
+        ),
       ];
 }

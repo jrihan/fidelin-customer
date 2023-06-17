@@ -17,10 +17,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-
-      // ),
+      appBar: AppBar(),
       backgroundColor: Colors.white,
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) =>

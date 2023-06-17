@@ -1,4 +1,5 @@
 import 'package:customer/app/modules/auth/presentation/controllers/signin_controller.dart';
+import 'package:customer/app/modules/auth/presentation/pages/forgot_password_page.dart';
 import 'package:customer/app/modules/auth/presentation/pages/signup_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -108,7 +109,14 @@ class _SignInPageState extends State<SignInPage> {
                           color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
-                      onTap: () => {print("Hello World")}),
+                      onTap: () => {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ForgotPasswordPage(),
+                              ),
+                            ),
+                          }),
                   const SizedBox(
                     height: 16.0,
                   ),
@@ -128,9 +136,12 @@ class _SignInPageState extends State<SignInPage> {
                               height: 25.0,
                               width: 25.0,
                             )
-                          : const Text(
+                          : Text(
                               "Entrar",
-                              style: TextStyle(fontSize: 16.0),
+                              style: TextStyle(
+                                  fontSize: 16.0,
+                                  color:
+                                      Theme.of(context).colorScheme.background),
                             ),
                     ),
                   ),

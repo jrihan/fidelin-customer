@@ -17,14 +17,17 @@ class AppWidget extends StatelessWidget {
           brightness: Brightness.light,
         ),
         appBarTheme: const AppBarTheme(
-          color: Color(0xFFF22F52),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          iconTheme: IconThemeData(
+            color: Color(0xFFF22F52), // <-- SEE HERE
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             minimumSize: const Size(0, 45),
           ),
         ),
-        fontFamily: 'Poppins',
       ),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
