@@ -13,6 +13,7 @@ class CardEntity {
   final int maxPoints;
   final RewardEntity reward;
   final StoreEntity store;
+  final String backgroundUrl;
 
   CardEntity({
     required this.id,
@@ -23,5 +24,6 @@ class CardEntity {
     required this.maxPoints,
     required this.reward,
     required this.store,
+    required this.backgroundUrl,
   });
 }

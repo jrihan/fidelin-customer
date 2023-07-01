@@ -6,13 +6,15 @@ import 'package:customer/app/modules/home/modules/cards/domain/entities/card_ent
 class CardMapper {
   static CardEntity mapDTOtoEntity(CardDTO dto) {
     return CardEntity(
-        id: dto.id,
-        expiration: dto.expiration,
-        points: dto.points,
-        color: dto.color,
-        logoUrl: dto.logoUrl,
-        maxPoints: dto.maxPoints,
-        reward: RewardMapper.mapDTOtoEntity(dto.reward),
-        store: StoreMapper.mapDTOtoEntity(dto.storeId));
+      id: dto.id,
+      expiration: dto.expiration,
+      points: dto.points,
+      color: dto.color,
+      logoUrl: dto.logoUrl,
+      maxPoints: dto.maxPoints,
+      backgroundUrl: dto.backgroundUrl,
+      reward: RewardMapper.mapDTOtoEntity(dto.reward),
+      store: StoreMapper.mapDTOtoEntity(dto.storeId),
+    );
   }
 }

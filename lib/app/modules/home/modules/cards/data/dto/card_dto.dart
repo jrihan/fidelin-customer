@@ -14,6 +14,7 @@ class CardDTO {
   final String logoUrl;
   final int maxPoints;
   final RewardDTO reward;
+  final String backgroundUrl;
 
   CardDTO({
     required this.id,
@@ -25,6 +26,7 @@ class CardDTO {
     required this.logoUrl,
     required this.maxPoints,
     required this.reward,
+    required this.backgroundUrl,
   });
 
   factory CardDTO.fromSnapshot(DocumentSnapshot userCardDoc,
@@ -47,15 +49,18 @@ class CardDTO {
               (cardDoc.get('color') as Map<String, dynamic>)["b"],
             )
           : const Color(0x00000000),
-      logoUrl: cardDoc.data().toString().contains('expiration')
-          ? cardDoc.get('expiration')
+      logoUrl: cardDoc.data().toString().contains('logo_url')
+          ? cardDoc.get('logo_url')
           : '',
-      maxPoints: cardDoc.data().toString().contains('expiration')
-          ? cardDoc.get('expiration') as int
+      maxPoints: cardDoc.data().toString().contains('max_points')
+          ? cardDoc.get('max_points') as int
           : 0,
       reward: RewardDTO.fromSnapshot(
         cardDoc.get('reward'),
       ),
+      backgroundUrl: cardDoc.data().toString().contains('background_url')
+          ? cardDoc.get('background_url')
+          : '',
     );
   }
 }
