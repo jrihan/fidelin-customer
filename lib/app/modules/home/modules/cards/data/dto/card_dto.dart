@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:customer/app/modules/home/modules/cards/data/dto/store_dto.dart';
 import 'package:flutter/material.dart';
 
 import 'reward_dto.dart';
@@ -6,7 +7,7 @@ import 'reward_dto.dart';
 class CardDTO {
   final String id;
   final String cardId;
-  final String storeId;
+  final StoreDTO storeId;
   final DateTime expiration;
   final List<String> points;
   final Color color;
@@ -26,14 +27,12 @@ class CardDTO {
     required this.reward,
   });
 
-  factory CardDTO.fromSnapshot(
-      DocumentSnapshot userCardDoc, DocumentSnapshot cardDoc) {
+  factory CardDTO.fromSnapshot(DocumentSnapshot userCardDoc,
+      DocumentSnapshot cardDoc, DocumentSnapshot storeDoc) {
     return CardDTO(
       id: userCardDoc.id,
       cardId: cardDoc.id,
-      storeId: cardDoc.data().toString().contains('store_id')
-          ? cardDoc.get('store_id')
-          : '',
+      storeId: StoreDTO.fromSnapshot(storeDoc),
       expiration: userCardDoc.data().toString().contains('expiration')
           ? (userCardDoc.get('expiration') as Timestamp).toDate()
           : DateTime.now(),

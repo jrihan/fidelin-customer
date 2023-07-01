@@ -51,8 +51,7 @@ abstract class _SignInControllerBase with Store {
   @action
   Future<void> signUp() async {
     const UserDTO user = UserDTO(
-        firstName: 'Emanuel',
-        lastName: 'Padilha',
+        name: 'Emanuel Padilha',
         email: 'manuelpadrilha22@gmail.com',
         phone: '+5581999999999',
         gender: 'male',

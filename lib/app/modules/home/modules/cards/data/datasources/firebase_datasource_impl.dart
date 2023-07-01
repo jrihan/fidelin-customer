@@ -16,6 +16,8 @@ class FirebaseDataSourceImpl implements CardsDataSource {
 
   CollectionReference get cardsCollection => firestore.collection('cards');
 
+  CollectionReference get storeCollection => firestore.collection('stores');
+
   FirebaseDataSourceImpl(this.firestore, this.auth);
 
   @override
@@ -30,8 +32,9 @@ class FirebaseDataSourceImpl implements CardsDataSource {
       for (QueryDocumentSnapshot userCardDoc in snapshot.docs) {
         var cardDoc =
             await cardsCollection.doc(userCardDoc.get('card_id')).get();
+        var storeDoc = await storeCollection.doc(cardDoc.get('store_id')).get();
 
-        cards.add(CardDTO.fromSnapshot(userCardDoc, cardDoc));
+        cards.add(CardDTO.fromSnapshot(userCardDoc, cardDoc, storeDoc));
       }
 
       return cards;
