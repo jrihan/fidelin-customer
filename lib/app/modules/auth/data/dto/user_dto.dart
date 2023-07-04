@@ -47,8 +47,8 @@ class UserDTO {
       name: doc.data().toString().contains('name') ? doc.get('name') : '',
       email: doc.data().toString().contains('email') ? doc.get('email') : '',
       phone: doc.data().toString().contains('phone') ? doc.get('phone') : '',
-      avatarUrl: doc.data().toString().contains('avatarUrl')
-          ? doc.get('avatarUrl')
+      avatarUrl: doc.data().toString().contains('avatar_url')
+          ? doc.get('avatar_url')
           : '',
       gender: doc.data().toString().contains('gender') ? doc.get('gender') : '',
     );
