@@ -1,6 +1,6 @@
 import 'package:customer/app/modules/home/modules/cards/presentation/pages/cards_page.dart';
 import 'package:customer/app/modules/home/modules/profile/presentation/pages/profile_page.dart';
-import 'package:customer/app/modules/home/modules/qrcode/presentation/qrcoder_page.dart';
+import 'package:customer/app/modules/home/modules/qrcode/presentation/pages/qrcoder_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
     _selectedPageIndex = 0;
     _pages = [
       CardsPage(),
-      const QrCodePage(),
       const ProfilePage(),
     ];
 
@@ -44,6 +43,7 @@ class _HomePageState extends State<HomePage> {
       //   title: Text(widget.title),
       // ),
       body: PageView(
+        scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: _pages,
@@ -55,7 +55,8 @@ class _HomePageState extends State<HomePage> {
   void _tapHandler(int index) {
     setState(() {
       _selectedPageIndex = index;
-      _pageController.jumpToPage(index);
+      _pageController.animateToPage(index,
+          duration: const Duration(milliseconds: 300), curve: Curves.linear);
     });
   }
 
@@ -82,7 +83,11 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             InkWell(
-              onTap: () => _tapHandler(1),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const QRViewExample(),
+                ));
+              },
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(

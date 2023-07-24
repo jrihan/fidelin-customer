@@ -13,7 +13,9 @@ class CardsPage extends StatefulWidget {
   _CardsPageState createState() => _CardsPageState();
 }
 
-class _CardsPageState extends State<CardsPage> {
+class _CardsPageState extends State<CardsPage>
+    with AutomaticKeepAliveClientMixin<CardsPage> {
+  bool get wantKeepAlive => true;
   final UserStore _userStore = Modular.get<UserStore>();
   final CardsController _cardsController = Modular.get<CardsController>();
 
@@ -39,7 +41,7 @@ class _CardsPageState extends State<CardsPage> {
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 25.0),
-                    height: constraints.maxHeight * 0.15,
+                    height: constraints.maxHeight * 0.25,
                     // child: Text(
                     //   "Olá, ${_userStore.user!.firstName}",
                     //   style: TextStyle(
