@@ -1,11 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:customer/app/modules/auth/data/dto/user_dto.dart';
 import 'package:customer/app/modules/home/modules/cards/data/datasources/cards_datasource.dart';
 import 'package:customer/app/modules/home/modules/cards/data/dto/card_dto.dart';
-import 'package:customer/app/modules/home/modules/cards/domain/entities/card_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'cards_datasource.dart';
 
 class FirebaseDataSourceImpl implements CardsDataSource {
   final FirebaseFirestore firestore;

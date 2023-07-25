@@ -11,7 +11,7 @@ class QrCodeRepositoryImpl implements QrCodeRepository {
   @override
   Future<Either<Exception, Unit>> addPoint(String pointId) async {
     try {
-      final result = await _dataSource.addPoint(pointId);
+      //final result = await _dataSource.addPoint(pointId);
 
       return right(unit);
     } on Exception catch (e) {

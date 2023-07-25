@@ -16,7 +16,7 @@ class CardsPage extends StatefulWidget {
 class _CardsPageState extends State<CardsPage>
     with AutomaticKeepAliveClientMixin<CardsPage> {
   bool get wantKeepAlive => true;
-  final UserStore _userStore = Modular.get<UserStore>();
+  //final UserStore _userStore = Modular.get<UserStore>();
   final CardsController _cardsController = Modular.get<CardsController>();
 
   @override
@@ -28,6 +28,7 @@ class _CardsPageState extends State<CardsPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) =>

@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:customer/app/modules/home/modules/cards/domain/entities/reward_entity.dart';
 import 'package:customer/app/modules/home/modules/cards/domain/entities/store_entity.dart';
-import 'package:mobx/mobx.dart';
 
 class CardEntity {
   final String id;

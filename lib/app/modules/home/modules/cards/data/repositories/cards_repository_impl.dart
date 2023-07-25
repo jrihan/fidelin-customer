@@ -6,7 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:customer/app/modules/home/modules/cards/domain/repositories/cards_repository.dart';
 
 class CardsRepositoryImpl implements CardsRepository {
-  CardsDataSource _dataSource;
+  final CardsDataSource _dataSource;
 
   CardsRepositoryImpl({required CardsDataSource dataSource})
       : _dataSource = dataSource;
