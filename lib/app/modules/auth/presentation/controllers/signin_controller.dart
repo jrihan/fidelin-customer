@@ -1,9 +1,8 @@
 import 'package:customer/shared/stores/user_store.dart';
 import 'package:dartz/dartz.dart';
-import 'package:customer/app/modules/auth/data/dto/user_dto.dart';
 import 'package:customer/app/modules/auth/domain/entities/user_entity.dart';
 import 'package:customer/app/modules/auth/domain/usecases/signin_with_email_usecase.dart';
-import 'package:customer/app/modules/auth/domain/usecases/signup_with_email_usercase.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -13,16 +12,17 @@ class SignInController = _SignInControllerBase with _$SignInController;
 
 abstract class _SignInControllerBase with Store {
   late SignInWithEmailUseCase _signInWithEmailUseCase;
-  late SignUpWithEmailUseCase _signUpWithEmailUseCase;
 
   final UserStore _userStore = Modular.get<UserStore>();
 
   _SignInControllerBase(
-      {required SignInWithEmailUseCase signInWithEmailUseCase,
-      required SignUpWithEmailUseCase signUpWithEmailUseCase}) {
+      {required SignInWithEmailUseCase signInWithEmailUseCase}) {
     _signInWithEmailUseCase = signInWithEmailUseCase;
-    _signUpWithEmailUseCase = signUpWithEmailUseCase;
   }
+
+  final formField = GlobalKey<FormState>();
+  TextEditingController emailTextController = TextEditingController();
+  TextEditingController passwordTextController = TextEditingController();
 
   @observable
   bool passwordVisible = false;
@@ -37,28 +37,44 @@ abstract class _SignInControllerBase with Store {
 
   @action
   Future<void> signIn() async {
-    loading = true;
-    final Either<Exception, UserEntity> _response =
-        await _signInWithEmailUseCase.call(
-            email: 'test@gmail.com', password: '12345678');
-    _response.fold((Exception e) {}, (UserEntity user) {
-      _userStore.setUser(user);
-      Modular.to.navigate('/home/');
-    });
-    loading = false;
+    // formField.currentState!.validate()
+    if (formField.currentState!.validate()) {
+      loading = true;
+
+      final Either<Exception, UserEntity> _response =
+          await _signInWithEmailUseCase.call(
+        email: emailTextController.text,
+        password: passwordTextController.text,
+      );
+      _response.fold((Exception e) {}, (UserEntity user) {
+        _userStore.setUser(user);
+        Modular.to.navigate('/home/');
+      });
+      loading = false;
+    }
   }
 
-  @action
-  Future<void> signUp() async {
-    const UserDTO user = UserDTO(
-        name: 'Emanuel Padilha',
-        email: 'manuelpadrilha22@gmail.com',
-        phone: '+5581999999999',
-        gender: 'male',
-        password: 'password123');
+  String? emailValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'Insira um email';
+    }
+    bool emailValid = RegExp(
+            r"/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/")
+        .hasMatch(value);
+    if (!emailValid) {
+      return "Insira um email válido";
+    }
+    return null;
+  }
 
-    final Either<Exception, Unit> _response =
-        await _signUpWithEmailUseCase.call(user);
-    _response.fold((Exception e) {}, (_) {});
+  String? passwordValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'Insira uma senha';
+    }
+    bool passwordValid = RegExp(r"(?=.{8,})").hasMatch(value);
+    if (!passwordValid) {
+      return "Insira uma senha válida (deve conter 8 caracteres)";
+    }
+    return null;
   }
 }

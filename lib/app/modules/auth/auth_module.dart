@@ -7,6 +7,7 @@ import 'package:customer/app/modules/auth/domain/usecases/signin_with_email_usec
 import 'package:customer/app/modules/auth/domain/usecases/signup_with_email_usercase.dart';
 import 'package:customer/app/modules/auth/presentation/controllers/forgot_password_controller.dart';
 import 'package:customer/app/modules/auth/presentation/controllers/signin_controller.dart';
+import 'package:customer/app/modules/auth/presentation/controllers/signup_controller.dart';
 import 'package:customer/app/modules/auth/presentation/pages/check_email_page.dart';
 import 'package:customer/app/modules/auth/presentation/pages/forgot_password_page.dart';
 import 'package:customer/app/modules/auth/presentation/pages/signin_page.dart';
@@ -24,8 +25,8 @@ class AuthModule extends Module {
         Bind.factory((i) => AuthRepositoryImpl(dataSource: i())),
         Bind.factory((i) => SignInWithEmailUseCaseImpl(repository: i())),
         Bind.factory((i) => SignUpWithEmailUseCaseImpl(repository: i())),
-        Bind.singleton((i) => SignInController(
-            signInWithEmailUseCase: i(), signUpWithEmailUseCase: i())),
+        Bind.singleton((i) => SignInController(signInWithEmailUseCase: i())),
+        Bind.singleton((i) => SignUpController(signUpWithEmailUseCase: i())),
 
         //Forgot Password
         Bind.factory((i) => ForgotPasswordUseCaseImpl(repository: i())),
