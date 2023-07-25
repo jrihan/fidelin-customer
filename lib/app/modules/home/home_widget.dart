@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedPageIndex = index;
       _pageController.animateToPage(index,
-          duration: const Duration(milliseconds: 300), curve: Curves.linear);
+          duration: const Duration(milliseconds: 200), curve: Curves.linear);
     });
   }
 
