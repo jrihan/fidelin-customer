@@ -1,5 +1,6 @@
 import 'package:customer/app/modules/auth/presentation/controllers/signin_controller.dart';
 import 'package:customer/app/modules/auth/presentation/controllers/signup_controller.dart';
+import 'package:customer/shared/utils/validators.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -28,6 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Form(
+                key: _controller.formField,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -44,6 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       height: 16.0,
                     ),
                     TextFormField(
+                      validator: Validators.name,
                       controller: _controller.nameTextController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -61,6 +64,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       height: 16.0,
                     ),
                     TextFormField(
+                      validator: Validators.email,
                       controller: _controller.emailTextController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -78,6 +82,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       height: 16.0,
                     ),
                     TextFormField(
+                      validator: _controller.passwordEquals,
                       controller: _controller.passwordTextController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -95,6 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       height: 16.0,
                     ),
                     TextFormField(
+                      validator: _controller.passwordEquals,
                       controller: _controller.confirmPasswordTextController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),

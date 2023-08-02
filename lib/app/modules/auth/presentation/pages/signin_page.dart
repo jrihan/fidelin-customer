@@ -1,6 +1,7 @@
 import 'package:customer/app/modules/auth/presentation/controllers/signin_controller.dart';
 import 'package:customer/app/modules/auth/presentation/pages/forgot_password_page.dart';
 import 'package:customer/app/modules/auth/presentation/pages/signup_page.dart';
+import 'package:customer/shared/utils/validators.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -62,7 +63,7 @@ class _SignInPageState extends State<SignInPage> {
                       height: 32.0,
                     ),
                     TextFormField(
-                      validator: _controller.emailValidator,
+                      validator: Validators.email,
                       controller: _controller.emailTextController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -81,7 +82,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     Observer(
                       builder: (_) => TextFormField(
-                        validator: _controller.passwordValidator,
+                        validator: Validators.password,
                         controller: _controller.passwordTextController,
                         obscureText: !_controller.passwordVisible,
                         enableSuggestions: false,

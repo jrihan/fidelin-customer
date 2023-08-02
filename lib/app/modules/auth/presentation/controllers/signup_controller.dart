@@ -16,6 +16,8 @@ abstract class _SignUpControllerBase with Store {
     _signUpWithEmailUseCase = signUpWithEmailUseCase;
   }
 
+  final formField = GlobalKey<FormState>();
+
   TextEditingController nameTextController = TextEditingController();
   TextEditingController emailTextController = TextEditingController();
   TextEditingController passwordTextController = TextEditingController();
@@ -23,15 +25,32 @@ abstract class _SignUpControllerBase with Store {
 
   @action
   Future<void> signUp() async {
-    const UserDTO user = UserDTO(
-        name: 'Emanuel Padilha',
-        email: 'manuelpadrilha22@gmail.com',
-        phone: '+5581999999999',
-        gender: 'male',
-        password: 'password123');
+    if (formField.currentState!.validate()) {
+      const UserDTO user = UserDTO(
+          name: 'Emanuel Padilha',
+          email: 'manuelpadrilha22@gmail.com',
+          phone: '+5581999999999',
+          gender: 'male',
+          password: 'password123');
 
-    final Either<Exception, Unit> _response =
-        await _signUpWithEmailUseCase.call(user);
-    _response.fold((Exception e) {}, (_) {});
+      final Either<Exception, Unit> _response =
+          await _signUpWithEmailUseCase.call(user);
+      _response.fold((Exception e) {}, (_) {});
+    }
+  }
+
+  String? passwordEquals(String? value) {
+    if (passwordTextController.text != confirmPasswordTextController.text) {
+      return 'As senhas devem ser iguais';
+    }
+
+    if (value!.isEmpty) {
+      return 'Insira uma senha';
+    }
+    bool passwordValid = RegExp(r"(?=.{8,})").hasMatch(value);
+    if (!passwordValid) {
+      return "Insira uma senha válida (deve conter 8 caracteres)";
+    }
+    return null;
   }
 }
