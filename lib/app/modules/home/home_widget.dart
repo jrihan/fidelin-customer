@@ -43,8 +43,9 @@ class _HomePageState extends State<HomePage> {
       //   title: Text(widget.title),
       // ),
       body: PageView(
-        scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
-        physics: const NeverScrollableScrollPhysics(),
+        onPageChanged: _scrollHandler,
+        //scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
+        physics: ClampingScrollPhysics(),
         controller: _pageController,
         children: _pages,
       ),
@@ -57,6 +58,12 @@ class _HomePageState extends State<HomePage> {
       _selectedPageIndex = index;
       _pageController.animateToPage(index,
           duration: const Duration(milliseconds: 200), curve: Curves.linear);
+    });
+  }
+
+  void _scrollHandler(int index) {
+    setState(() {
+      _selectedPageIndex = index + 1;
     });
   }
 

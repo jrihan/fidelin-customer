@@ -23,6 +23,15 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration(seconds: 1))
+        .then((value) => _controller.addPoint("Jsvb1Z3PG8vXhW43aMi4"));
+  }
+
   @override
   void reassemble() {
     super.reassemble();

@@ -22,9 +22,14 @@ class QrCodeDataSourceImpl extends QrCodeDataSource {
       final pointSnapshot = await pointsCollection.doc(pointId).get();
 
       final custumerCardSnapshot = await costumerCardsCollection
-          .where("user_id", isEqualTo: auth.currentUser?.uid)
+          .where("user_id", isEqualTo: auth.currentUser!.uid)
           .where("card_id", isEqualTo: pointSnapshot.get('card_id'))
           .get();
+
+      // if(custumerCardSnapshot.docs.isEmpty){
+      //   CustomerCardDTO(userId: auth.currentUser!.uid, cardId: pointSnapshot.get("card_id"), );
+      //   costumerCardsCollection.add(data)
+      // }
 
       final PointDTO pointDTO = PointDTO.fromSnapshot(pointSnapshot);
       final CustomerCardDTO customerCardDTO =
