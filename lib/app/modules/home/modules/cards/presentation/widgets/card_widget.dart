@@ -72,7 +72,7 @@ class _CardWidgetState extends State<CardWidget> {
         borderRadius: BorderRadius.circular(20.0),
         color: Colors.black26,
       ),
-      width: widget.constraints.maxWidth / 1.30,
+      width: widget.constraints.maxWidth / 1.20,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

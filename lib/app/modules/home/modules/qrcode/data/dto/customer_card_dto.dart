@@ -8,11 +8,11 @@ class CustomerCardDTO {
   final List<String> points;
 
   CustomerCardDTO({
-    required this.id,
+    this.id = '',
     required this.cardId,
     required this.userId,
-    required this.expiration,
-    required this.points,
+    this.expiration,
+    this.points = const [],
   });
 
   Map<String, dynamic> toMap() {

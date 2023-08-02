@@ -48,6 +48,7 @@ dependencies:
   font_awesome_flutter: ^9.2.0
   material_design_icons_flutter: ^7.0.7296
   url_launcher: ^6.1.11
+  asuka: ^2.2.0
 
 
 dev_dependencies:
@@ -91,6 +92,7 @@ flutter:
     - assets/images/white-logo.png
     - assets/images/forgot_password.png
     - assets/images/mail_sent.png
+    - assets/images/dialog_success.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

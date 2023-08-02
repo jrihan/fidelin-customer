@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
                 child: Icon(
                   Icons.home,
-                  color: _selectedPageIndex == 0
+                  color: _selectedPageIndex == 1
                       ? Theme.of(context).colorScheme.primary
                       : Colors.black45,
                 ),

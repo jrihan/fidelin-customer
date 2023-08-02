@@ -15,7 +15,7 @@ class _ProfilePageState extends State<ProfilePage>
   bool get wantKeepAlive => true;
   final UserStore _userStore = Modular.get<UserStore>();
 
-  double picSize = 55.0;
+  double picSize = 60.0;
 
   @override
   void initState() {
@@ -59,25 +59,31 @@ class _ProfilePageState extends State<ProfilePage>
                     child: ListView(
                       physics: const NeverScrollableScrollPhysics(),
                       children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15),
-                          child: ListTile(
-                            onTap: () {
-                              print("test");
-                            },
-                            leading: Icon(Icons.person),
-                            title: Text('Editar Perfil'),
+                        Visibility(
+                          visible: false,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            child: ListTile(
+                              onTap: () {
+                                print("test");
+                              },
+                              leading: Icon(Icons.person),
+                              title: Text('Editar Perfil'),
+                            ),
                           ),
                         ),
                         Divider(height: 0),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15),
-                          child: ListTile(
-                            leading: Icon(Icons.lock),
-                            title: Text('Mudar Senha'),
+                        Visibility(
+                          visible: false,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            child: ListTile(
+                              leading: Icon(Icons.lock),
+                              title: Text('Mudar Senha'),
+                            ),
                           ),
                         ),
-                        Divider(height: 0),
+                        Divider(height: 1),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 15),
                           child: ListTile(
@@ -114,13 +120,24 @@ class _ProfilePageState extends State<ProfilePage>
               left: constraints.maxWidth / 2 - picSize,
               child: CircleAvatar(
                 radius: picSize,
-                backgroundColor: Colors.white,
-                child: CircleAvatar(
-                  radius: picSize - 3,
-                  backgroundImage: NetworkImage(
-                    _userStore.user!.avatarUrl!,
-                  ),
-                ),
+                backgroundColor: Colors.black12,
+                child: _userStore.user!.avatarUrl != ""
+                    ? CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: picSize - 2,
+                        backgroundImage: NetworkImage(
+                          _userStore.user!.avatarUrl!,
+                        ),
+                      )
+                    : CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: picSize - 2,
+                        child: Icon(
+                          Icons.person,
+                          size: 64,
+                          color: Colors.black26,
+                        ),
+                      ),
               ),
             ),
           ],

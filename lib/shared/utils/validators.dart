@@ -27,7 +27,9 @@ class Validators {
     if (value!.isEmpty) {
       return 'Insira uma nome';
     }
-    bool passwordValid = RegExp(r"/^[a-z ,.'-]+$/i").hasMatch(value);
+    bool passwordValid = RegExp(
+            r"([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)")
+        .hasMatch(value);
     if (!passwordValid) {
       return "Insira um nome válido (Nome e Sobrenome)";
     }

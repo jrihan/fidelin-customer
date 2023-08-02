@@ -3,6 +3,7 @@ import 'package:customer/app/modules/auth/presentation/controllers/signup_contro
 import 'package:customer/shared/utils/validators.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
@@ -117,9 +118,32 @@ class _SignUpPageState extends State<SignUpPage> {
                     const SizedBox(
                       height: 32.0,
                     ),
-                    ElevatedButton(
-                      onPressed: () => _controller.signUp(),
-                      child: const Text("Criar conta"),
+                    Observer(
+                      builder: (_) => ElevatedButton(
+                        onPressed: _controller.isLoading
+                            ? null
+                            : () => _controller.signUp(),
+                        child: _controller.isLoading
+                            ? SizedBox(
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background,
+                                  ),
+                                ),
+                                height: 25.0,
+                                width: 25.0,
+                              )
+                            : Text(
+                                "Criar conta",
+                                style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background),
+                              ),
+                      ),
                     ),
                     const SizedBox(
                       height: 16.0,

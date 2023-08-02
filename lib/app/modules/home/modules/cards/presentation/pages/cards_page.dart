@@ -16,7 +16,7 @@ class CardsPage extends StatefulWidget {
 class _CardsPageState extends State<CardsPage>
     with AutomaticKeepAliveClientMixin<CardsPage> {
   bool get wantKeepAlive => true;
-  //final UserStore _userStore = Modular.get<UserStore>();
+  final UserStore _userStore = Modular.get<UserStore>();
   final CardsController _cardsController = Modular.get<CardsController>();
 
   @override
@@ -41,26 +41,53 @@ class _CardsPageState extends State<CardsPage>
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 25.0),
-                    height: constraints.maxHeight * 0.25,
-                    // child: Text(
-                    //   "Olá, ${_userStore.user!.firstName}",
-                    //   style: TextStyle(
-                    //       color: Theme.of(context).colorScheme.primary,
-                    //       fontSize: 32,
-                    //       fontWeight: FontWeight.w500),
-                    // ),
-                  ),
-                  Expanded(
-                    child: ScrollSnapList(
-                      onItemFocus: (_) => {},
-                      itemSize: constraints.maxWidth / 1.30,
-                      itemBuilder: (context, index) =>
-                          CardWidget(constraints: constraints, index: index),
-                      itemCount: _cardsController.cards.length,
-                      dynamicItemSize: true,
+                    // color: Colors.red,
+                    height: constraints.maxHeight * 0.20,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 28.0, vertical: 16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Olá, ${_userStore.user!.firstName}",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontSize: 32,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(
+                            height: 8.0,
+                          ),
+                          const Text(
+                            "Seus cartões fidelidade em um só lugar!",
+                          ),
+                        ],
+                      ),
                     ),
                   ),
+                  _cardsController.isLoading
+                      ? const Expanded(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        )
+                      : Expanded(
+                          child: _cardsController.cards.isNotEmpty
+                              ? ScrollSnapList(
+                                  dynamicSizeEquation: (double scale) {
+                                    return 1 - min(scale.abs() / 1000, 0.2);
+                                  },
+                                  onItemFocus: (_) => {},
+                                  itemSize: constraints.maxWidth / 1.20,
+                                  itemBuilder: (context, index) => CardWidget(
+                                      constraints: constraints, index: index),
+                                  itemCount: _cardsController.cards.length,
+                                  dynamicItemSize: true,
+                                )
+                              : const Center(
+                                  child: Text("Você não possui cartões")),
+                        ),
                 ],
               ),
             ),

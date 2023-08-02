@@ -17,8 +17,12 @@ abstract class _CardsControllerBase with Store {
   @observable
   ObservableList<CardEntity> cards = ObservableList<CardEntity>();
 
+  @observable
+  bool isLoading = false;
+
   @action
   Future<void> fetchUserCards() async {
+    isLoading = true;
     final Either<Exception, List<CardEntity>> _response =
         await _fetchCardsUseCase.call();
     _response.fold(
@@ -30,5 +34,6 @@ abstract class _CardsControllerBase with Store {
         cards.addAll(listOfCards);
       },
     );
+    isLoading = false;
   }
 }

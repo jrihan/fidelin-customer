@@ -1,6 +1,7 @@
 import 'package:customer/app/modules/home/modules/qrcode/domain/usecases/add_point_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mobx/mobx.dart';
+import 'package:asuka/asuka.dart';
 
 part 'qrcode_controller.g.dart';
 
@@ -17,7 +18,7 @@ abstract class _QrCodeControllerBase with Store {
   Future<void> addPoint(String pointId) async {
     final Either<Exception, void> _response = await _addPointUseCase(pointId);
     _response.fold((Exception e) {
-      print("error");
+      AsukaSnackbar.warning("Error").show();
     }, (void a) => Null);
   }
 }

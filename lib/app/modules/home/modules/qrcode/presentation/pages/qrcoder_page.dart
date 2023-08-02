@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:customer/app/modules/home/modules/qrcode/presentation/components/dialog_success_widget.dart';
 import 'package:customer/app/modules/home/modules/qrcode/presentation/controller/qrcode_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +29,16 @@ class _QRViewExampleState extends State<QRViewExample> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(seconds: 1))
-        .then((value) => _controller.addPoint("Jsvb1Z3PG8vXhW43aMi4"));
+    addPointToCard("Jsvb1Z3PG8vXhW43aMi4");
+  }
+
+  void addPointToCard(String code) async {
+    await _controller.addPoint(code.toString()).then(
+          (value) => showDialog(
+            context: context,
+            builder: (_) => const DialogSuccessWidget(),
+          ),
+        );
   }
 
   @override
@@ -95,7 +104,12 @@ class _QRViewExampleState extends State<QRViewExample> {
       setState(() {
         result = scanData;
         if (scanData.format == BarcodeFormat.qrcode) {
-          _controller.addPoint(scanData.code.toString());
+          _controller.addPoint(scanData.code.toString()).then(
+                (value) => showDialog(
+                  context: context,
+                  builder: (_) => const DialogSuccessWidget(),
+                ),
+              );
         }
       });
     });

@@ -26,25 +26,38 @@ class QrCodeDataSourceImpl extends QrCodeDataSource {
           .where("card_id", isEqualTo: pointSnapshot.get('card_id'))
           .get();
 
-      // if(custumerCardSnapshot.docs.isEmpty){
-      //   CustomerCardDTO(userId: auth.currentUser!.uid, cardId: pointSnapshot.get("card_id"), );
-      //   costumerCardsCollection.add(data)
-      // }
+      if (custumerCardSnapshot.docs.isEmpty) {
+        final PointDTO pointDTO = PointDTO.fromSnapshot(pointSnapshot);
+        final CustomerCardDTO customerCardDTO = CustomerCardDTO(
+          userId: auth.currentUser!.uid,
+          cardId: pointSnapshot.get("card_id"),
+        );
 
-      final PointDTO pointDTO = PointDTO.fromSnapshot(pointSnapshot);
-      final CustomerCardDTO customerCardDTO =
-          CustomerCardDTO.fromSnapshot(custumerCardSnapshot.docs.first);
+        if (!pointDTO.used && pointDTO.userId == "") {
+          pointDTO.userId = auth.currentUser?.uid;
+          pointDTO.used = true;
 
-      if (!pointDTO.used && pointDTO.userId == "") {
-        pointDTO.userId = auth.currentUser?.uid;
-        pointDTO.used = true;
+          customerCardDTO.points.add(pointDTO.id);
 
-        customerCardDTO.points.add(pointDTO.id);
+          pointsCollection.doc(pointId).update(pointDTO.toMap());
+          costumerCardsCollection.add(customerCardDTO.toMap());
+        }
+      } else {
+        final PointDTO pointDTO = PointDTO.fromSnapshot(pointSnapshot);
+        final CustomerCardDTO customerCardDTO =
+            CustomerCardDTO.fromSnapshot(custumerCardSnapshot.docs.first);
 
-        pointsCollection.doc(pointId).update(pointDTO.toMap());
-        costumerCardsCollection
-            .doc(customerCardDTO.id)
-            .update(customerCardDTO.toMap());
+        if (!pointDTO.used && pointDTO.userId == "") {
+          pointDTO.userId = auth.currentUser?.uid;
+          pointDTO.used = true;
+
+          customerCardDTO.points.add(pointDTO.id);
+
+          pointsCollection.doc(pointId).update(pointDTO.toMap());
+          costumerCardsCollection
+              .doc(customerCardDTO.id)
+              .update(customerCardDTO.toMap());
+        }
       }
     } catch (e) {
       rethrow;

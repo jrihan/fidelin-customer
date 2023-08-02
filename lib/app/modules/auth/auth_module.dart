@@ -26,7 +26,8 @@ class AuthModule extends Module {
         Bind.factory((i) => SignInWithEmailUseCaseImpl(repository: i())),
         Bind.factory((i) => SignUpWithEmailUseCaseImpl(repository: i())),
         Bind.singleton((i) => SignInController(signInWithEmailUseCase: i())),
-        Bind.singleton((i) => SignUpController(signUpWithEmailUseCase: i())),
+        Bind.singleton((i) => SignUpController(
+            signUpWithEmailUseCase: i(), signInWithEmailUseCase: i())),
 
         //Forgot Password
         Bind.factory((i) => ForgotPasswordUseCaseImpl(repository: i())),

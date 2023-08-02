@@ -25,6 +25,22 @@ mixin _$CardsController on _CardsControllerBase, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: '_CardsControllerBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$fetchUserCardsAsyncAction =
       AsyncAction('_CardsControllerBase.fetchUserCards', context: context);
 
@@ -36,7 +52,8 @@ mixin _$CardsController on _CardsControllerBase, Store {
   @override
   String toString() {
     return '''
-cards: ${cards}
+cards: ${cards},
+isLoading: ${isLoading}
     ''';
   }
 }
