@@ -31,6 +31,7 @@ class QrCodeDataSourceImpl extends QrCodeDataSource {
         final CustomerCardDTO customerCardDTO = CustomerCardDTO(
           userId: auth.currentUser!.uid,
           cardId: pointSnapshot.get("card_id"),
+          points: [],
         );
 
         if (!pointDTO.used && pointDTO.userId == "") {

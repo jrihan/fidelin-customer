@@ -8,7 +8,7 @@ class CardDTO {
   final String id;
   final String cardId;
   final StoreDTO storeId;
-  final DateTime expiration;
+  final DateTime? expiration;
   final List<String> points;
   final Color color;
   final String logoUrl;

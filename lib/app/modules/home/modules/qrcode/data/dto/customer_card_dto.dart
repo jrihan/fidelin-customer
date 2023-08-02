@@ -5,21 +5,20 @@ class CustomerCardDTO {
   final String cardId;
   final String userId;
   final DateTime? expiration;
-  final List<String> points;
+  List<String> points;
 
   CustomerCardDTO({
     this.id = '',
     required this.cardId,
     required this.userId,
     this.expiration,
-    this.points = const [],
+    required this.points,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'card_id': cardId,
       'user_id': userId,
-      'expiration': expiration,
       'points': points,
     };
   }

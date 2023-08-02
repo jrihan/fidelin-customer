@@ -5,7 +5,7 @@ import 'package:customer/app/modules/home/modules/cards/domain/entities/store_en
 
 class CardEntity {
   final String id;
-  final DateTime expiration;
+  final DateTime? expiration;
   final List<String> points;
   final Color color;
   final String logoUrl;
